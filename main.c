@@ -4,12 +4,8 @@ void	free_program(t_program *program, int release)
 {
 	if (program->philos && release > 0)
 		free(program->philos);
-	if (program->ph_tid && release > 1)
-		free(program->ph_tid);
-	if (program->forks && release > 2)
+	if (program->forks && release > 1)
 		free(program->forks);
-	if (program->shared_fork && release > 3)
-		free(program->shared_fork);
 }
 
 void	exit_program(t_program *program, int release)
@@ -20,14 +16,17 @@ void	exit_program(t_program *program, int release)
 	while (i < program->num_of_philos)
 	{
 		if (program->philos)
-			pthread_mutex_destroy(&program->philos[i].philo_lock);
+		{
+			pthread_mutex_destroy(&program->philos[i].r_fork);
+			pthread_mutex_destroy(&program->philos[i].l_fork);
+		}
 		if (program->forks)
 			pthread_mutex_destroy(&program->forks[i]);
 		i++;
 	}
 	pthread_mutex_destroy(&program->message_mutex);
-	pthread_mutex_destroy(&program->prog_lock);
-	pthread_mutex_destroy(&program->philo_die);
+	pthread_mutex_destroy(&program->meal_mutex);
+	pthread_mutex_destroy(&program->death_mutex);
 	free_program(program, release);
 }
 
@@ -66,6 +65,6 @@ int	main(int argc, char **argv)
 		return (1);
 	if (create_threads(&program))
 		return (1);
-	exit_program(&program, 4);
+	exit_program(&program, 2);
 	return (0);
 }

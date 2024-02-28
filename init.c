@@ -19,8 +19,6 @@ void	init_philos(t_program *program)
 	i = 0;
 	while (i < program->num_of_philos)
 	{
-		// program->philos[i].forks = 0;
-		// program->shared_fork[i] = 0;
 		program->philos[i].id = i + 1;
         program->philos[i].eating = 0;
         program->philos[i].meals_eaten = 0;
@@ -44,7 +42,7 @@ int	init_forks(t_program *program)
 	while (++i < program->num_of_philos)
 	{
 		if (pthread_mutex_init(&program->forks[i], NULL) != 0)
-			return (error("Error initializing fork mutexes", program, 4));
+			return (error("Error initializing fork mutexes", program, 2));
 	}
 	return (0);
 }
@@ -56,18 +54,12 @@ int	init_program(t_program *program, char **argv, char argc)
     program->philos = malloc(sizeof(t_philo) * program->num_of_philos);
 	if (!program->philos)
 		return (error("Philos alloc error\n", program, 1));
-	pthread_mutex_init(&program->prog_lock, NULL);
+	pthread_mutex_init(&program->meal_mutex, NULL);
 	pthread_mutex_init(&program->message_mutex, NULL);
-	pthread_mutex_init(&program->philo_die, NULL);
-	// program->ph_tid = malloc(sizeof(pthread_t) * program->num_of_philos);
-	// if (!program->ph_tid)
-	// 	return (error("Ph_tid alloc error\n", program, 2));
+	pthread_mutex_init(&program->death_mutex, NULL);
 	program->forks = malloc(sizeof(pthread_mutex_t) * program->num_of_philos);
 	if (!program->forks)
-	    return (error("Forks alloc error\n", program, 3));
-	// program->shared_fork = malloc(sizeof(char *) * program->num_of_philos);
-	// if (!program->shared_fork)
-	// 	return (error("Forks alloc error\n", program, 4));
+	    return (error("Forks alloc error\n", program, 2));
 	return (0);
 }
 
