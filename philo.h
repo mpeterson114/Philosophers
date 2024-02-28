@@ -66,6 +66,11 @@ int	time_checker(t_philo *philo);
 int	meal_checker(t_philo *philo);
 void *monitor_routine(void *ph_pointer);
 
+/* routine_actions.c */
+void	thinking(t_philo *philo);
+void	sleeping(t_philo *philo);
+void	eating(t_philo *philo);
+
 /* utils */
 int		is_alpha_string(char *str);
 int		ft_atoi(char *str);

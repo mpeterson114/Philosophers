@@ -32,7 +32,7 @@ int	time_checker(t_philo *philo)
 	{
 		if (past_time_limit(&philo[i], philo->program->time_to_die))
 		{
-			write_message("died", &philo[i], &philo[i].id);
+			write_message("died", &philo[i], philo[i].id);
 			pthread_mutex_lock(&philo->program->death_mutex);
 			philo->program->dead = 1;
 			pthread_mutex_unlock(&philo->program->death_mutex);

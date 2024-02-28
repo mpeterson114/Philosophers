@@ -19,11 +19,11 @@ void	*philo_routine(void *ph_pointer)
 	philo = (t_philo *) ph_pointer;
 	if (philo->id % 2 == 0)
 		ft_usleep(1);
-	while (!death_checker)
+	while (!death_checker(philo))
 	{
-		eat(philo);
-		sleep(philo);
-		think(philo);
+		eating(philo);
+		sleeping(philo);
+		thinking(philo);
 	}
 	return (ph_pointer);
 }

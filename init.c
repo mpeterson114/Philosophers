@@ -22,8 +22,8 @@ void	init_philos(t_program *program)
 		program->philos[i].id = i + 1;
         program->philos[i].eating = 0;
         program->philos[i].meals_eaten = 0;
-        program->philos[i].last_meal = get_current_time();
-        program->philos[i].start_time = get_current_time();
+        program->philos[i].last_meal = current_time_m();
+        program->philos[i].start_time = current_time_m();
 		program->philos[i].program = program;
 		program->philos[i].l_fork = &program->forks[i];
         if (i == 0)

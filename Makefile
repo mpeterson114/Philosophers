@@ -14,7 +14,7 @@ SRC =	main.c \
 		monitor.c \
 		routine_actions.c \
 
-SANITIZE = -g3 -fsanitize=thread
+#SANITIZE = -g3 -fsanitize=thread
 #SANITIZE = -g3 -fsanitize=address
 #SANITIZE = -g3
 

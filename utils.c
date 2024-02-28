@@ -44,7 +44,7 @@ long	current_time_m(void)
 	struct timeval	time;
 
 	if (gettimeofday(&time, NULL))
-		return (error("gettimeofday() error\n", NULL, 4));
+		return (error("gettimeofday() error\n", NULL, 2));
 	return ((time.tv_sec * 1000) + (time.tv_usec / 1000));
 }
 
@@ -54,7 +54,7 @@ int	ft_usleep(size_t millisec)
 
 	s_time = current_time_m();
 	while ((current_time_m() - s_time) < millisec)
-		usleep(millisec / 10);
+		usleep(500);
 	return (0);
 }
 

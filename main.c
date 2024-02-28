@@ -17,8 +17,8 @@ void	exit_program(t_program *program, int release)
 	{
 		if (program->philos)
 		{
-			pthread_mutex_destroy(&program->philos[i].r_fork);
-			pthread_mutex_destroy(&program->philos[i].l_fork);
+			pthread_mutex_destroy(program->philos[i].r_fork);
+			pthread_mutex_destroy(program->philos[i].l_fork);
 		}
 		if (program->forks)
 			pthread_mutex_destroy(&program->forks[i]);
