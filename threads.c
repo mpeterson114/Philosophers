@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   threads.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mpeterso <mpeterso@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/03/04 08:59:03 by mpeterso          #+#    #+#             */
+/*   Updated: 2024/03/04 09:31:00 by mpeterso         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
 
 int	death_checker(t_philo *philo)
@@ -31,12 +43,11 @@ void	*philo_routine(void *ph_pointer)
 int	create_threads(t_program *program)
 {
 	int			i;
-    pthread_t   monitor;
+	pthread_t	monitor;
 
-    if(pthread_create(&monitor, NULL, &monitor_routine, program->philos))
-        return (error("Monitor thread create error", program, 2));
+	if (pthread_create(&monitor, NULL, &monitor_routine, program->philos))
+		return (error("Monitor thread create error", program, 2));
 	i = -1;
-	// program->start_time = current_time_m();
 	while (++i < program->num_of_philos)
 	{
 		if (pthread_create(&program->philos[i].thread, NULL, &philo_routine,
@@ -44,8 +55,8 @@ int	create_threads(t_program *program)
 			return (error("Philo thread create error", program, 2));
 	}
 	i = -1;
-    if (pthread_join(monitor, NULL))
-        return (error("Thread join error: monitor", program, 2));
+	if (pthread_join(monitor, NULL))
+		return (error("Thread join error: monitor", program, 2));
 	while (++i < program->num_of_philos)
 	{
 		if (pthread_join(program->philos[i].thread, NULL))

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mpeterso <mpeterso@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/03/04 08:58:42 by mpeterso          #+#    #+#             */
+/*   Updated: 2024/03/04 09:30:30 by mpeterso         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
 
 void	args_fill(t_program *program, char **argv, char argc)
@@ -20,16 +32,16 @@ void	init_philos(t_program *program)
 	while (i < program->num_of_philos)
 	{
 		program->philos[i].id = i + 1;
-        program->philos[i].eating = 0;
-        program->philos[i].meals_eaten = 0;
-        program->philos[i].last_meal = current_time_m();
-        program->philos[i].start_time = current_time_m();
+		program->philos[i].meals_eaten = 0;
+		program->philos[i].last_meal = current_time_m();
+		program->philos[i].start_time = current_time_m();
 		program->philos[i].program = program;
 		program->philos[i].l_fork = &program->forks[i];
-        if (i == 0)
-            program->philos[i].r_fork = &program->forks[program->num_of_philos - 1];
-        else
-            program->philos[i].r_fork = &program->forks[i - 1];
+		if (i == 0)
+			program->philos[i].r_fork
+				= &program->forks[program->num_of_philos - 1];
+		else
+			program->philos[i].r_fork = &program->forks[i - 1];
 		i++;
 	}
 }
@@ -51,7 +63,7 @@ int	init_program(t_program *program, char **argv, char argc)
 {
 	args_fill(program, argv, argc);
 	program->dead = 0;
-    program->philos = malloc(sizeof(t_philo) * program->num_of_philos);
+	program->philos = malloc(sizeof(t_philo) * program->num_of_philos);
 	if (!program->philos)
 		return (error("Philos alloc error\n", program, 1));
 	pthread_mutex_init(&program->meal_mutex, NULL);
@@ -59,7 +71,7 @@ int	init_program(t_program *program, char **argv, char argc)
 	pthread_mutex_init(&program->death_mutex, NULL);
 	program->forks = malloc(sizeof(pthread_mutex_t) * program->num_of_philos);
 	if (!program->forks)
-	    return (error("Forks alloc error\n", program, 2));
+		return (error("Forks alloc error\n", program, 2));
 	return (0);
 }
 

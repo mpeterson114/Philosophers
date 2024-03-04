@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   monitor.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mpeterso <mpeterso@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/03/04 08:58:55 by mpeterso          #+#    #+#             */
+/*   Updated: 2024/03/04 09:27:39 by mpeterso         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
 
 void	write_message(char *str, t_philo *philo, int id)
 {
-	long time;
+	long	time;
 
 	pthread_mutex_lock(&philo->program->message_mutex);
 	time = current_time_m() - philo->start_time;
@@ -11,21 +23,21 @@ void	write_message(char *str, t_philo *philo, int id)
 	pthread_mutex_unlock(&philo->program->message_mutex);
 }
 
-static int past_time_limit(t_philo *philo, int time_to_die)
+static int	past_time_limit(t_philo *philo, int time_to_die)
 {
 	pthread_mutex_lock(&philo->program->meal_mutex);
-	if (current_time_m() - philo->last_meal >= time_to_die) //&&philo_eating?
+	if (current_time_m() - philo->last_meal >= time_to_die)
 	{
 		pthread_mutex_unlock(&philo->program->meal_mutex);
 		return (1);
-	}  
+	}
 	pthread_mutex_unlock(&philo->program->meal_mutex);
 	return (0);
 }
 
 int	time_checker(t_philo *philo)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < philo->program->num_of_philos)
@@ -45,8 +57,8 @@ int	time_checker(t_philo *philo)
 
 int	meal_checker(t_philo *philo)
 {
-	int i;
-	int done_eating;
+	int	i;
+	int	done_eating;
 
 	i = 0;
 	done_eating = 0;
@@ -55,7 +67,7 @@ int	meal_checker(t_philo *philo)
 	while (i < philo->program->num_of_philos)
 	{
 		pthread_mutex_lock(&philo->program->meal_mutex);
-		if (philo[i].meals_eaten >= philo->program->num_meals)  // or == ??
+		if (philo[i].meals_eaten >= philo->program->num_meals)
 			done_eating++;
 		pthread_mutex_unlock(&philo->program->meal_mutex);
 		i++;
@@ -70,15 +82,15 @@ int	meal_checker(t_philo *philo)
 	return (0);
 }
 
-void *monitor_routine(void *ph_pointer)
+void	*monitor_routine(void *ph_pointer)
 {
-    t_philo *philos;
+	t_philo	*philos;
 
-    philos = (t_philo *)ph_pointer;
-    while (1)
+	philos = (t_philo *)ph_pointer;
+	while (1)
 	{
 		if (time_checker(philos) || meal_checker(philos))
-            break ;
+			break ;
 	}
-    return (ph_pointer);
+	return (ph_pointer);
 }

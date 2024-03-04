@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philo.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mpeterso <mpeterso@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/03/04 08:58:58 by mpeterso          #+#    #+#             */
+/*   Updated: 2024/03/04 09:26:20 by mpeterso         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PHILO_H
 # define PHILO_H
 
@@ -18,9 +30,7 @@ typedef struct s_program
 	int				num_meals;
 	int				num_of_philos;
 	int				dead;
-	// char			*shared_fork;
 	t_philo			*philos;
-	// pthread_t		*ph_tid;
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	message_mutex;
 	pthread_mutex_t	death_mutex;
@@ -31,15 +41,12 @@ typedef struct s_philo
 {
 	int				id;
 	int				meals_eaten;
-    int             eating;
 	long			last_meal;
-    long            start_time;
-    pthread_t       thread;
-	// int				forks;
+	long			start_time;
+	pthread_t		thread;
 	t_program		*program;
-	pthread_mutex_t *r_fork;
-    pthread_mutex_t *l_fork;
-	// pthread_mutex_t	philo_lock;
+	pthread_mutex_t	*r_fork;
+	pthread_mutex_t	*l_fork;
 }	t_philo;
 
 /* main.c */
@@ -62,9 +69,9 @@ int		create_threads(t_program *program);
 
 /* monitor.c */
 void	write_message(char *str, t_philo *philo, int id);
-int	time_checker(t_philo *philo);
-int	meal_checker(t_philo *philo);
-void *monitor_routine(void *ph_pointer);
+int		time_checker(t_philo *philo);
+int		meal_checker(t_philo *philo);
+void	*monitor_routine(void *ph_pointer);
 
 /* routine_actions.c */
 void	thinking(t_philo *philo);
@@ -77,7 +84,5 @@ int		ft_atoi(char *str);
 long	current_time_m(void);
 int		ft_usleep(size_t millisec);
 int		ft_strcmp(char *s1, char *s2);
-
-
 
 #endif
