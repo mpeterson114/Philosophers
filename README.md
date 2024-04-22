@@ -4,7 +4,7 @@
 
 📈 **Final grade: 100/100**
 
-## Guidelines
+## 📌 Guidelines
 Philosophers sit around a table, with a big plate of spaghetti at its center. Each philosopher represents a thread. 
 
 They each have one fork, however because **two** forks are needed to eat they will need to borrow their neighbor's fork to eat. Of course, if they borrow a neighbor's fork, the neighbor can't use the fork. 
@@ -21,7 +21,7 @@ Given the right parameters, philosophers keep repeating their cycle virtually fo
 * **time_to_sleep** (in milliseconds): The time a philosopher will spend sleeping.
 * **number_of_times_each_philosopher_must_eat** _(optional argument)_: If all philosophers have eaten at least this parametrized times, the simulation stops. If not specified, the simulation stops when a philosopher dies.
 
-## Usage
+## ⚙️ Usage
 Clone the repository:
 ```
 git clone git@github.com:mpeterson114/philosophers_42.git
