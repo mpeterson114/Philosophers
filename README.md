@@ -13,10 +13,7 @@ The processes / threads (i.e., individual philosophers) must communicate to know
 
 Given the right parameters, philosophers keep repeating their cycle virtually forever, unless a maximum number of times each philosopher must eat before the simulation ends is given.
 
-The program takes the following parameters: 
-```
-./philo <number_of_philosophers> <time_to_die> <time_to_eat> <time_to_sleep> <number_of_times_each_philosopher_must_eat>
-```
+**Program parameters:**
 
 * **number_of_philosophers:** The number of philosophers (also the number of forks).
 * **time_to_die** (in milliseconds):  If a philosopher didn’t start eating 'time_to_die' milliseconds since the beginning of their last meal or the beginning of the simulation, they die.
@@ -27,4 +24,27 @@ The program takes the following parameters:
 ## Usage
 Clone the repository:
 ```
-git clone 
+git clone git@github.com:mpeterson114/philosophers_42.git
+```
+
+Enter into the directory and run the command ```make```. 
+
+Then run the executable with the following parameters (last argument is optional): 
+```<number_of_philosophers> <time_to_die> <time_to_eat> <time_to_sleep> <[number_of_times_each_philosopher_must_eat]>```
+
+
+**Example 1** (no philosopher should die and the program should run continuously):
+```
+./philo 4 410 200 200
+```
+
+**Example 2** (1 philosopher should die):
+```
+./philo 4 310 200 100
+```
+
+**Example 3** (no philosopher should die and the program should exit once every philosopher has eaten 7 times):
+```
+./philo 5 800 200 200 7
+```
+
