@@ -16,11 +16,9 @@ SRC =	main.c \
 
 #SANITIZE = -g3 -fsanitize=thread
 #SANITIZE = -g3 -fsanitize=address
-#SANITIZE = -g3
 
 CC = gcc
 CFLAGS = -Wall -Werror -Wextra $(SANITIZE)
-#-pthread -Ofast -O3 -march=native
 REMOVE = rm -f 
 
 %.o: %.c 
