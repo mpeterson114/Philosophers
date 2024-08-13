@@ -1,4 +1,4 @@
-# Philosophers 🍝
+# Philosophers
 ## Summary
 42's version of the [dining philosophers problem](https://en.wikipedia.org/wiki/Dining_philosophers_problem). This project involves multithreading and concurrent programming using the pthread API, with mutexes used to avoid deadlocks and race conditions. It is also a good exercise in C optimization, as we need to manage CPU usage as efficiently as possible to ensure the survival of our philosophers.
 
